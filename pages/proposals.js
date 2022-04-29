@@ -4,6 +4,7 @@ import Script from 'next/script'
 
 import MemberBalance from '../components/MemberBalance'
 import Navbar from '../components/layouts/navbar'
+import GetVotes from '../components/getVotes'
 const Proposals = () => {
     return (
         <>
@@ -30,28 +31,11 @@ const Proposals = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td className="p-3">
-                                                <div className="d-flex">
-                                                    <i className="uil uil-comment text-muted h5"></i>
-                                                    <div className="flex-1 content ms-3">
-                                                        <a href="forums-topic.html" className="forum-title text-primary fw-bold">Хөрөнгө оруулалтын санал</a>
-                                                        <p className="text-muted small mb-0 mt-1">Хамтын эзэмшлийн сангийн тодорхой хувиар технологийн салбарын хөрөнгө оруулалтын багц авах уу?</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <th className="p-3">
-                                                <div className="align-items-center">
-                                                    <img src="assets/images/new/bayar.png" className="avatar avatar-ex-small rounded-circle" height="32" alt="" />
-                                                    <p className="mb-0 d-inline fw-normal h6">Bayar</p>
-                                                </div>
-                                            </th>
-                                            <td className="text-center small p-3">3</td>
-                                            <td className="text-center small p-3 text-end">5</td>
-                                        </tr>
-
+                                        
+                                        <GetVotes/>
                                     </tbody>
                                 </table>
+                                
                             </div>
                         </div>
 

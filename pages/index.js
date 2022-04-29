@@ -6,6 +6,7 @@ import firstImg from '../assets/images/new/12345.png'
 import EQDImg from '../assets/images/new/EQD.png'
 import iconJS from '../assets/libs/feather-icons/feather.min.js'
 import NavbarHome from '../components/layouts/navbarHome'
+import TokenTransfer from '../components/tokenTransfer'
 
 var converter = require('hex2dec');
 
@@ -299,34 +300,7 @@ const Home = () => {
                 <div className="row align-items-center g-0">
 
                   <div className="col-lg-12 col-md-7">
-                    <form className="login-form p-4">
-                      <div className="row">
-                      <div className="col-lg-12">
-                          <div className="mb-3">
-                            <label className="form-label">Нэр <span className="text-danger">*</span></label>
-                            <div className="form-icon position-relative">
-                              <i data-feather="user" className="fea icon-sm icons"></i>
-                              <input type="text" className="form-control ps-5" placeholder="Нэр" name="name" />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-lg-12">
-                          <div className="mb-3">
-                            <label className="form-label">Токен хэмжээ <span className="text-danger">*</span></label>
-                            <div className="form-icon position-relative">
-                              <i data-feather="dollar-sign" className="fea icon-sm icons"></i>
-                              <input type="number" className="form-control ps-5" placeholder="Хэмжээ" name="amount" />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-lg-12 mb-0">
-                          <div className="d-grid">
-                            <button className="btn btn-primary">Хүсэлт илгээх</button>
-                          </div>
-                        </div>
-
-                      </div>
-                    </form>
+                    <TokenTransfer/>
                   </div>
                 </div>
               </div>

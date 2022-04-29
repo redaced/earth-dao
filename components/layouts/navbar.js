@@ -18,7 +18,6 @@ export default function Navbar({ children }) {
         if (token) {
             token.balanceOf(address).then((balance) => {
                 setMyEarthToken(balance.displayValue)
-                console.log(address, balance);
             }).catch(error => {
                 console.log(error)
             })
