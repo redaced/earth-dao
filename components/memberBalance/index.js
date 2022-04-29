@@ -150,7 +150,7 @@ function MemberBalance() {
                         <td className="content mt-4">
                           <Link href={'https://mumbai.polygonscan.com/address/' + datafetch.holder} passHref>
                             <a target="_blank" rel="noreferrer">
-                              <p className="mb-0 d-inline fw-normal h6">{datafetch.holder.substring(0, 6)}...{datafetch.holder.substring(datafetch.holder.length - 5, datafetch.holder.length - 1)} </p>
+                              <p className="mb-0 d-inline fw-normal h6">{datafetch.holder.substring(0, 6)}...{datafetch.holder.substring(datafetch.holder.length - 5, datafetch.holder.length)} </p>
 
                             </a>
                           </Link>

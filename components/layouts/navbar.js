@@ -66,10 +66,10 @@ export default function Navbar({ children }) {
                                 </li> */}
                                 <li className="list-inline-item ps-1 mb-0 me-2">
                                     <span className="login-btn-primary">
-                                        <span className='text-primary'>{address.substring(0, 6)}...{address.substring(address.length - 5, address.length - 1)}</span>
+                                        <span className='text-primary'>{address.substring(0, 6)}...{address.substring(address.length - 5, address.length)}</span>
                                     </span>
                                     <span className="login-btn-light">
-                                        <span className='text-primary'>{address.substring(0, 6)}...{address.substring(address.length - 5, address.length - 1)}</span>
+                                        <span className='text-primary'>{address.substring(0, 6)}...{address.substring(address.length - 5, address.length)}</span>
                                     </span>
                                 </li>
                                 <li className="list-inline-item ps-1 mb-0">
