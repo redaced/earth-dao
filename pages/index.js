@@ -5,6 +5,7 @@ import Script from 'next/script'
 import firstImg from '../assets/images/new/12345.png'
 import EQDImg from '../assets/images/new/EQD.png'
 import iconJS from '../assets/libs/feather-icons/feather.min.js'
+import NavbarHome from '../components/layouts/navbarHome'
 
 var converter = require('hex2dec');
 
@@ -98,6 +99,7 @@ const Home = () => {
 
   return (
     <>
+      <NavbarHome/>
       <section className="bg-home d-flex align-items-center">
         <div className="container">
           <div className="row justify-content-center">
