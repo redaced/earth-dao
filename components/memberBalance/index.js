@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useAddress, useEditionDrop } from '@thirdweb-dev/react';
+import { useAddress, useEditionDrop, useToken } from '@thirdweb-dev/react';
 
 
 function MemberBalance() {
@@ -8,20 +8,39 @@ function MemberBalance() {
   //   const address = useAddress();
   //   const [myEarthToken, setMyEarthToken] = useState([]);
   const [memberAddresses, setMemberAddresses] = useState([]);
+//   const editionDrop = useEditionDrop("0xd6be70A3CA3d3fAaB7978FCe946C4af210dA17a8");
+  const token = useToken("0x372750d4b65e47B6eD5b0367ba39931eb959c14e");
+//   const address = useAddress();
+//   const [memberAddresses, setMemberAddresses] = useState([]);
+  const [memberTokenAmounts, setMemberTokenAmounts] = useState([]);
 
-  useEffect(() => {
-    const getAllAddresses = async () => {
-      try {
-        const memberAddresses = await editionDrop.history.getAllClaimerAddresses(0);
-        setMemberAddresses(memberAddresses);
-        console.log("🚀 Members addresses", memberAddresses);
-      } catch (error) {
-        console.error("failed to get member list", error);
-      }
+//   useEffect(() => {
+//     const getAllAddresses = async () => {
+//       try {
+//         const memberAddresses = await editionDrop.history.getAllClaimerAddresses(0);
+//         setMemberAddresses(memberAddresses);
+//         console.log("🚀 Members addresses", memberAddresses);
+//       } catch (error) {
+//         console.error("failed to get member list", error);
+//       }
 
+//     };
+//     getAllAddresses();
+//   }, [editionDrop]);
+
+    // This useEffect grabs the # of token each member holds.
+    useEffect(() => {
+    const getAllBalances = async () => {
+        try {
+        const amounts = await token.history.getAllHolderBalances();
+        setMemberTokenAmounts(amounts);
+        console.log("👜 Amounts", amounts);
+        } catch (error) {
+        console.error("failed to get member balances", error);
+        }
     };
-    getAllAddresses();
-  }, [editionDrop]);
+    getAllBalances();
+    }, [token]);
 
  
   return (
@@ -115,12 +134,12 @@ function MemberBalance() {
                   </thead>
 
                   <tbody>
-                    {memberAddresses.map((a)=>
+                    {memberTokenAmounts.map((datafetch, index)=>
                       <tr>
                       <th className="p-3">
                         <div className="align-items-center">
                           <img src="assets/images/new/bayar.png" className="avatar avatar-small rounded-circle" height="32" />
-                          <p className="mb-0 d-inline fw-normal h6">{a} </p>
+                          <p className="mb-0 d-inline fw-normal h6">{datafetch.holder} </p>
                         </div>
                       </th>
                       <td className="text-success p-3"><div className="progress-box">
@@ -131,7 +150,7 @@ function MemberBalance() {
                         </div>
                       </div></td>
                       <td className="content mt-4">
-                        <h6 className="mt-0"><span className="text-primary">4690</span> токен</h6></td>
+                        <h6 className="mt-0"><span className="text-primary">{datafetch.balance.displayValue}</span> токен</h6></td>
 
                     </tr>)}
                     
