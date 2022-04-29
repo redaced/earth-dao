@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAddress, useEditionDrop, useToken } from '@thirdweb-dev/react';
 import Image from 'next/image'
-
+import Link from 'next/link'
 function MemberBalance() {
   const editionDrop = useEditionDrop("0xd6be70A3CA3d3fAaB7978FCe946C4af210dA17a8");
   //   const token = useToken("0x372750d4b65e47B6eD5b0367ba39931eb959c14e");
@@ -130,10 +130,10 @@ function MemberBalance() {
                 <table className="table mb-0 table-center">
                   <thead>
                     <tr>
-                      <th scope="col" className="fw-normal border-bottom text-muted py-4 px-3">Эзэмшигчид</th>
-                      <th scope="col" className="fw-normal border-bottom text-muted py-4 px-3"></th>
-                      <th scope="col" className="fw-normal border-bottom text-muted py-4 px-3">Эзэмшлийн хувь(%)</th>
-                      <th scope="col" className="fw-normal border-bottom text-muted py-4 px-3">Эзэмшилийн хэмжээ</th>
+                      <th scope="col" className="fw-normal border-bottom text-muted py-4 px-3" style={{ width: '10%' }}>Эзэмшигчид</th>
+                      <th scope="col" className="fw-normal border-bottom text-muted py-4 px-3" style={{ width: '10%' }}></th>
+                      <th scope="col" className="fw-normal border-bottom text-muted py-4 px-3" style={{ width: '50%' }}>Эзэмшлийн хувь(%)</th>
+                      <th scope="col" className="fw-normal border-bottom text-muted py-4 px-3" style={{ width: '30%' }}>Эзэмшилийн хэмжээ</th>
 
                     </tr>
                   </thead>
@@ -143,12 +143,18 @@ function MemberBalance() {
                       <tr>
                         <th className="p-3">
                           <div className="align-items-center">
-                            <Image src={'https://avatars.dicebear.com/api/adventurer/' + index + '.svg'} height="60" width="60" />
-                            
+                            <Image src={'https://robohash.org/' + index} height="60" width="60" />
+
                           </div>
                         </th>
                         <td className="content mt-4">
-                          <p className="mb-0 d-inline fw-normal h6">{datafetch.holder.substring(0, 6)}...{datafetch.holder.substring(datafetch.holder.length - 5, datafetch.holder.length - 1)} </p></td>
+                          <Link href={'https://mumbai.polygonscan.com/address/' + datafetch.holder} passHref>
+                            <a target="_blank" rel="noreferrer">
+                              <p className="mb-0 d-inline fw-normal h6">{datafetch.holder.substring(0, 6)}...{datafetch.holder.substring(datafetch.holder.length - 5, datafetch.holder.length - 1)} </p>
+
+                            </a>
+                          </Link>
+                        </td>
                         <td className="text-success p-3"><div className="progress-box">
                           <div className="progress">
                             <div className="progress-bar position-relative bg-primary" style={{ width: ((parseInt(datafetch.balance.displayValue) / 1000) / sum * 100) + '%' }}>

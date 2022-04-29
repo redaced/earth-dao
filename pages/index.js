@@ -99,7 +99,7 @@ const Home = () => {
 
   return (
     <>
-      <NavbarHome/>
+      <NavbarHome />
       <section className="bg-home d-flex align-items-center">
         <div className="container">
           <div className="row justify-content-center">
@@ -108,7 +108,7 @@ const Home = () => {
                 <h4 className="heading fw-bold text-white title-dark mb-3">EARTHQUAKE ХАМТРАЛ <br /> газар хөдлөлтийг хамтын хүчээр</h4>
                 <h5 className="para-desc mx-auto text-light title-dark">Эрсдэлээ даа. Ашиг ол.</h5>
                 <div className="mt-4 pt-2">
-                  <a href="#" className="btn btn-primary">Илүүг мэдье</a>
+                  <a className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#login-popup">Илүүг мэдье</a>
                 </div>
               </div>
             </div>
@@ -284,15 +284,58 @@ const Home = () => {
           <div className="row justify-content-center">
             <div className="col-12 text-center">
               <div className="mt-4 pt-2">
-                <a className="btn btn-primary">Нэгдье<i className="uil uil-angle-right-b"></i></a>
+                <a className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#login-popup">Нэгдье<i className="uil uil-angle-right-b"></i></a>
               </div>
             </div>
           </div>
 
         </div>
       </section>
-      <Script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" />
+      <div className="modal fade" id="login-popup" aria-hidden="true">
+        <div className="modal-dialog  modal-sm modal-dialog-centered">
+          <div className="modal-content rounded shadow border-0">
+            <div className="modal-body p-0">
+              <div className="container-fluid px-0">
+                <div className="row align-items-center g-0">
 
+                  <div className="col-lg-12 col-md-7">
+                    <form className="login-form p-4">
+                      <div className="row">
+                      <div className="col-lg-12">
+                          <div className="mb-3">
+                            <label className="form-label">Нэр <span className="text-danger">*</span></label>
+                            <div className="form-icon position-relative">
+                              <i data-feather="user" className="fea icon-sm icons"></i>
+                              <input type="text" className="form-control ps-5" placeholder="Нэр" name="name" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-lg-12">
+                          <div className="mb-3">
+                            <label className="form-label">Токен хэмжээ <span className="text-danger">*</span></label>
+                            <div className="form-icon position-relative">
+                              <i data-feather="dollar-sign" className="fea icon-sm icons"></i>
+                              <input type="number" className="form-control ps-5" placeholder="Хэмжээ" name="amount" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-lg-12 mb-0">
+                          <div className="d-grid">
+                            <button className="btn btn-primary">Хүсэлт илгээх</button>
+                          </div>
+                        </div>
+
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" />
+      <Script src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js' />
       <Script id="show-banner" strategy="lazyOnload">
         {`
           feather.replace();
@@ -368,7 +411,7 @@ const Home = () => {
           `}
       </Script>
     </>
-    
+
 
 
   );
