@@ -42,7 +42,11 @@ function MemberBalance() {
     getAllBalances();
     }, [token]);
 
- 
+    let sum = 0;
+
+    memberTokenAmounts.forEach(value => {
+      sum += parseInt(value.balance.displayValue) / 1000 ;
+    });
   return (
     <div>
       {/* <p>address: {address}</p> */}
@@ -72,7 +76,7 @@ function MemberBalance() {
                   <i className="uil uil-user text-primary"></i>
                 </div>
                 <div className="content mt-3">
-                  <h4 className="mb-0"><span className="counter-value" data-target="445">10</span>K +</h4>
+                  <h4 className="mb-0"><span className="counter-value" data-target="445">{memberTokenAmounts.length}</span></h4>
                   <h6 className="mb-0 text-muted">Эзэмшигчийн тоо</h6>
                 </div>
               </div>
@@ -86,7 +90,7 @@ function MemberBalance() {
                   <i className="uil uil-bitcoin-circle text-primary"></i>
                 </div>
                 <div className="content mt-3">
-                  <h4 className="mb-0"><span className="counter-value" data-target="1154">11</span>K +</h4>
+                  <h4 className="mb-0"><span className="counter-value" data-target="1154">{sum}</span>K</h4>
                   <h6 className="mb-0 text-muted">Токен</h6>
                 </div>
               </div>
@@ -144,8 +148,8 @@ function MemberBalance() {
                       </th>
                       <td className="text-success p-3"><div className="progress-box">
                         <div className="progress">
-                          <div className="progress-bar position-relative bg-primary">
-                            <div className="progress-value d-block text-muted h6">23%</div>
+                          <div className="progress-bar position-relative bg-primary" style={{ width: ((parseInt(datafetch.balance.displayValue) / 1000) / sum * 100) + '%' }}>
+                            <div className="progress-value d-block text-muted h6">{(parseInt(datafetch.balance.displayValue) / 1000) / sum * 100}%</div>
                           </div>
                         </div>
                       </div></td>
