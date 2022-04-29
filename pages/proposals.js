@@ -26,7 +26,7 @@ const Proposals = () => {
                                         <tr>
                                             <th scope="col" className="border-bottom p-3" >Санал</th>
                                             <th scope="col" className="border-bottom p-3 text-center" >Санаачлагч</th>
-                                            <th scope="col" className="border-bottom p-3 text-center">Тоо</th>
+                                            {/* <th scope="col" className="border-bottom p-3 text-center">Тоо</th> */}
                                             <th scope="col" className="border-bottom p-3 text-end" >Хувь</th>
                                         </tr>
                                     </thead>

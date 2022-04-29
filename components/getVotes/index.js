@@ -30,7 +30,7 @@ function GetVotes() {
                 <Link href={'/detail/' + datafetch.proposalId}>
                   <a className="forum-title text-primary fw-bold">Хөрөнгө оруулалтын санал</a>
                 </Link>
-                <p className="text-muted small mb-0 mt-1">{datafetch.proposer} хаягнаас EARTHDAO-д {datafetch.description.split('transfer ')[1].split(' tokens')[0]} токен эзэмшин нэгдэх хүсэлт илгээсэн байна.</p>
+                <p className="text-muted small mb-0 mt-1">{datafetch.description}</p>
               </div>
             </div>
           </td>
@@ -45,7 +45,7 @@ function GetVotes() {
               </Link>
             </div>
           </th>
-          <td className="text-center small p-3">{datafetch.description.split('transfer ')[1].split(' tokens')[0]}</td>
+          {/* <td className="text-center small p-3"></td> */}
           <td className="text-center small p-3 text-end">0</td>
         </tr>
       )}
