@@ -28,14 +28,15 @@ export default function Navbar({ children }) {
         <>
             <header id="topnav" className="defaultscroll sticky tagline-height">
                 <div className="container">
-                    <a className="logo">
-                        {/* <span className="logo-light-mode"> */}
-                        <Image src={logoDark} className="l-dark" height={40} width={140} alt="" />
-                        <Image src={logoDark} className="l-light" height={40} width={140} alt="" />
-                        {/* </span> */}
-                        {/* <Image src={logoImg} height={24} className="logo-dark-mode" alt="" /> */}
-                    </a>
-
+                    <Link href="/">
+                        <a className="logo">
+                            {/* <span className="logo-light-mode"> */}
+                            <Image src={logoDark} className="l-dark" height={40} width={140} alt="" />
+                            <Image src={logoDark} className="l-light" height={40} width={140} alt="" />
+                            {/* </span> */}
+                            {/* <Image src={logoImg} height={24} className="logo-dark-mode" alt="" /> */}
+                        </a>
+                    </Link>
                     <div className="menu-extras">
                         <div className="menu-item">
                             <a className="navbar-toggle" id="isToggle">
@@ -66,10 +67,10 @@ export default function Navbar({ children }) {
                                 </li> */}
                                 <li className="list-inline-item ps-1 mb-0 me-2">
                                     <span className="login-btn-primary">
-                                        <span className='text-primary'>Your Earth balance: {myEarthToken}</span>
+                                        <span className='text-primary'>{address.substring(0, 6)}...{address.substring(address.length - 5, address.length - 1)}</span>
                                     </span>
                                     <span className="login-btn-light">
-                                        <span className='text-primary'>Your Earth balance: {myEarthToken}</span>
+                                        <span className='text-primary'>{address.substring(0, 6)}...{address.substring(address.length - 5, address.length - 1)}</span>
                                     </span>
                                 </li>
                                 <li className="list-inline-item ps-1 mb-0">

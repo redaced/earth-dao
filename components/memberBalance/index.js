@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAddress, useEditionDrop, useToken } from '@thirdweb-dev/react';
-
+import Image from 'next/image'
 
 function MemberBalance() {
   const editionDrop = useEditionDrop("0xd6be70A3CA3d3fAaB7978FCe946C4af210dA17a8");
@@ -8,45 +8,45 @@ function MemberBalance() {
   //   const address = useAddress();
   //   const [myEarthToken, setMyEarthToken] = useState([]);
   const [memberAddresses, setMemberAddresses] = useState([]);
-//   const editionDrop = useEditionDrop("0xd6be70A3CA3d3fAaB7978FCe946C4af210dA17a8");
+  //   const editionDrop = useEditionDrop("0xd6be70A3CA3d3fAaB7978FCe946C4af210dA17a8");
   const token = useToken("0x372750d4b65e47B6eD5b0367ba39931eb959c14e");
-//   const address = useAddress();
-//   const [memberAddresses, setMemberAddresses] = useState([]);
+  //   const address = useAddress();
+  //   const [memberAddresses, setMemberAddresses] = useState([]);
   const [memberTokenAmounts, setMemberTokenAmounts] = useState([]);
 
-//   useEffect(() => {
-//     const getAllAddresses = async () => {
-//       try {
-//         const memberAddresses = await editionDrop.history.getAllClaimerAddresses(0);
-//         setMemberAddresses(memberAddresses);
-//         console.log("🚀 Members addresses", memberAddresses);
-//       } catch (error) {
-//         console.error("failed to get member list", error);
-//       }
+  //   useEffect(() => {
+  //     const getAllAddresses = async () => {
+  //       try {
+  //         const memberAddresses = await editionDrop.history.getAllClaimerAddresses(0);
+  //         setMemberAddresses(memberAddresses);
+  //         console.log("🚀 Members addresses", memberAddresses);
+  //       } catch (error) {
+  //         console.error("failed to get member list", error);
+  //       }
 
-//     };
-//     getAllAddresses();
-//   }, [editionDrop]);
+  //     };
+  //     getAllAddresses();
+  //   }, [editionDrop]);
 
-    // This useEffect grabs the # of token each member holds.
-    useEffect(() => {
+  // This useEffect grabs the # of token each member holds.
+  useEffect(() => {
     const getAllBalances = async () => {
-        try {
+      try {
         const amounts = await token.history.getAllHolderBalances();
         setMemberTokenAmounts(amounts);
         console.log("👜 Amounts", amounts);
-        } catch (error) {
+      } catch (error) {
         console.error("failed to get member balances", error);
-        }
+      }
     };
     getAllBalances();
-    }, [token]);
+  }, [token]);
 
-    let sum = 0;
+  let sum = 0;
 
-    memberTokenAmounts.forEach(value => {
-      sum += parseInt(value.balance.displayValue) / 1000 ;
-    });
+  memberTokenAmounts.forEach(value => {
+    sum += parseInt(value.balance.displayValue) / 1000;
+  });
   return (
     <div>
       {/* <p>address: {address}</p> */}
@@ -131,6 +131,7 @@ function MemberBalance() {
                   <thead>
                     <tr>
                       <th scope="col" className="fw-normal border-bottom text-muted py-4 px-3">Эзэмшигчид</th>
+                      <th scope="col" className="fw-normal border-bottom text-muted py-4 px-3"></th>
                       <th scope="col" className="fw-normal border-bottom text-muted py-4 px-3">Эзэмшлийн хувь(%)</th>
                       <th scope="col" className="fw-normal border-bottom text-muted py-4 px-3">Эзэмшилийн хэмжээ</th>
 
@@ -138,26 +139,28 @@ function MemberBalance() {
                   </thead>
 
                   <tbody>
-                    {memberTokenAmounts.map((datafetch, index)=>
+                    {memberTokenAmounts.map((datafetch, index) =>
                       <tr>
-                      <th className="p-3">
-                        <div className="align-items-center">
-                          <img src="assets/images/new/bayar.png" className="avatar avatar-small rounded-circle" height="32" />
-                          <p className="mb-0 d-inline fw-normal h6">{datafetch.holder} </p>
-                        </div>
-                      </th>
-                      <td className="text-success p-3"><div className="progress-box">
-                        <div className="progress">
-                          <div className="progress-bar position-relative bg-primary" style={{ width: ((parseInt(datafetch.balance.displayValue) / 1000) / sum * 100) + '%' }}>
-                            <div className="progress-value d-block text-muted h6">{(parseInt(datafetch.balance.displayValue) / 1000) / sum * 100}%</div>
+                        <th className="p-3">
+                          <div className="align-items-center">
+                            <Image src={'https://avatars.dicebear.com/api/adventurer/' + index + '.svg'} height="60" width="60" />
+                            
                           </div>
-                        </div>
-                      </div></td>
-                      <td className="content mt-4">
-                        <h6 className="mt-0"><span className="text-primary">{datafetch.balance.displayValue}</span> токен</h6></td>
+                        </th>
+                        <td className="content mt-4">
+                          <p className="mb-0 d-inline fw-normal h6">{datafetch.holder.substring(0, 6)}...{datafetch.holder.substring(datafetch.holder.length - 5, datafetch.holder.length - 1)} </p></td>
+                        <td className="text-success p-3"><div className="progress-box">
+                          <div className="progress">
+                            <div className="progress-bar position-relative bg-primary" style={{ width: ((parseInt(datafetch.balance.displayValue) / 1000) / sum * 100) + '%' }}>
+                              <div className="progress-value d-block text-muted h6">{(parseInt(datafetch.balance.displayValue) / 1000) / sum * 100}%</div>
+                            </div>
+                          </div>
+                        </div></td>
+                        <td className="content mt-4">
+                          <h6 className="mt-0"><span className="text-primary">{datafetch.balance.displayValue}</span> токен</h6></td>
 
-                    </tr>)}
-                    
+                      </tr>)}
+
 
                   </tbody>
                 </table>
