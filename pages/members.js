@@ -4,7 +4,7 @@ import Script from 'next/script'
 
 import MemberBalance from '../components/MemberBalance'
 import Navbar from '../components/layouts/navbar'
-const About = () => {
+const Members = () => {
   return (
     <>
       {/* <TokenBalance/> */}
@@ -94,4 +94,4 @@ const About = () => {
   );
 }
 
-export default About
+export default Members
