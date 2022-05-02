@@ -1,37 +1,46 @@
-// import TokenBalance from '../components/tokenBalance'
-// import TokenTransfer from '../components/tokenTransfer'
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
-import MemberBalance from '../../components/MemberBalance'
 import Navbar from '../../components/layouts/navbar'
 import Script from 'next/script'
-import { useVote } from '@thirdweb-dev/react';
-import Link from 'next/link'
+import { useVote, useAddress } from '@thirdweb-dev/react';
 import Image from 'next/image'
 
 const Detail = () => {
     const router = useRouter()
     const { pid } = router.query
-
-    const vote = useVote("0x2205B2275b7A81BD65f9d776c735520DdaC8d14c")
-    const [votes, setVotes] = useState([]);
+    const address = useAddress();
+    const vote = useVote(process.env.NEXT_PUBLIC_VOTE_ADDRESS)
+    const [value, setValue] = useState(0)
+    const [voteDescription, setVoteDescription] = useState([]);
+    const [voteStartBlock, setVoteStartBlock] = useState([]);
+    const [voteEndBlock, setVoteEndBlock] = useState([]);
+    const [voteCreator, setVoteCreator] = useState('');
     useEffect(() => {
         const getVotes = async () => {
             try {
-                const votes = await vote.getAll();
-                setVotes(votes);
+                const votes = await vote.getAll()
+                votes.forEach(vote => {
+                    if(vote.proposalId._hex === pid){
+                        setVoteDescription(vote.description)
+                        setVoteStartBlock(vote.startBlock._hex)
+                        setVoteEndBlock(vote.endBlock._hex)
+                        setVoteCreator(vote.proposer)
+                    }
+                });
             } catch (error) {
                 console.error("votes: ", error);
             }
         };
         getVotes();
-    }, [vote]);
-    console.log(pid)
+    }, [vote,pid,setVoteDescription,setVoteStartBlock,setVoteEndBlock,setVoteCreator]);
+    const submit = async function(){
+        await vote.vote(pid, value, "I like this proposal!");
+    }
     return (
         <>
 
             <Navbar />
-            {votes.length > 0 ? (
+            {voteDescription ? (
                 <>
                     <section className="section">
                         <div className="container">
@@ -39,16 +48,15 @@ const Detail = () => {
                                 <div className="col-lg-8">
                                     <div className="rounded shadow">
                                         <div className="p-4">
-                                            <h5 className="text-primary mb-0">Сэлэнгэд болсон газар хөдөлтөнд өртсөн EQ DAO-н 2 гишүүний
-                                                хохирлыг 100% нөхөн олгох уу?</h5>
+                                            <h5 className="text-primary mb-0">{voteDescription}</h5>
                                             <div className="d-flex justify-content-between">
                                                 <div className="d-flex align-items-center">
                                                     <a className="pe-3" href="forums-comments.html#">
-                                                    <Image src={'https://robohash.org/1'} height="60" width="60" />
+                                                    <Image src={'https://stamp.fyi/avatar/' + voteCreator} height="60" width="60" />
                                                     </a>
                                                     <div className="flex-1 commentor-detail">
                                                         <h6 className="mb-0"><a 
-                                                            className="media-heading text-dark">Munkh</a></h6>
+                                                            className="media-heading text-dark">{voteCreator.substring(0, 6)}...{voteCreator.substring(voteCreator.length - 5, voteCreator.length)}</a></h6>
                                                         <small className="text-muted">Санаачлагч</small>
                                                     </div>
                                                 </div>
@@ -175,9 +183,9 @@ const Detail = () => {
                                             <div className="mb-0">
                                             <br/>
                                                 <div className="d-flex">
-                                                    <button className="btn btn-primary me-2">Зөвшөөрөх</button>
-                                                    <button className="btn btn-danger me-2">Татгалзах</button>
-                                                    <button className="btn btn-warning">Түдгэлзэх</button>
+                                                    <button className="btn btn-primary me-2" onClick={e => { setValue(0); submit() }}>Зөвшөөрөх</button>
+                                                    <button className="btn btn-danger me-2" onClick={e => { setValue(1); submit() }}>Татгалзах</button>
+                                                    <button className="btn btn-warning" onClick={e => { setValue(2); submit() }}>Түдгэлзэх</button>
                                                 </div>
                                             </div>
                                            

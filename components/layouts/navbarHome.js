@@ -5,21 +5,9 @@ import logoImg from '../../assets/images/logo-light.png'
 import logoDark from '../../assets/images/logo-dark.png'
 import Link from 'next/link'
 export default function NavbarHome({ children }) {
-    const token = useToken(process.env.NEXT_PUBLIC_TOKEN_ADDRESS)
     const address = useAddress();
     const connectWithMetamask = useMetamask();
     const disconnectWallet = useDisconnect();
-    const [myEarthToken, setMyEarthToken] = useState([]);
-  
-    useEffect(() => {
-      if (token) {
-        token.balanceOf(address).then((balance) => {
-          setMyEarthToken(balance.displayValue)
-        }).catch(error => {
-          console.log(error)
-        })
-      }
-    }, [token, address]);
     return (
       <>
         <header id="topnav" className="defaultscroll sticky">

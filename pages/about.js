@@ -1,8 +1,8 @@
 // import TokenTransfer from '../components/tokenTransfer'
-import GetVotes from '../components/getVotes'
+import Delegate from '../components/delegateToken'
 const About = () => {
     return (
-        <GetVotes/>
+        <Delegate/>
     );
   }
   

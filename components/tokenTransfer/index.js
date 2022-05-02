@@ -8,13 +8,14 @@ function TokenTransfer() {
   const vote = useVote(process.env.NEXT_PUBLIC_VOTE_ADDRESS)
   const address = useAddress()
   const [value, setValue] = useState('')
-
+  const amount = value;
+  const description = address+" хаягнаас EARTHDAO-д "+ amount +" токен эзэмшин нэгдэх хүсэлт илгээсэн байна.";
+  
   const transferToken = async () => {
-    const amount = value;
-    const description = address+" хаягнаас EARTHDAO-д "+ amount +" токен эзэмшин нэгдэх хүсэлт илгээсэн байна.";
     const executions = [
       {
         toAddress: address.toString(),
+        gasLimit: 1000000,
         nativeTokenValue: 0,
         transactionData: token.encoder.encode(
           "transfer",[
@@ -24,7 +25,16 @@ function TokenTransfer() {
         )
       }
     ]
-    await vote.propose(description, executions);
+    if(token){
+      const await1 = await Promise.all([
+        fetch(token.delegateTo(address)), 
+        fetch(vote.propose(description, executions))
+      ])
+      const [response] = await Promise.all([
+        await1
+      ])
+      console.log(response)
+    }
   }
 
   return (

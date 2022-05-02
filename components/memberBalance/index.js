@@ -115,7 +115,7 @@ function MemberBalance() {
                       <tr key={index}>
                         <th className="p-3">
                           <div className="align-items-center">
-                            <Image src={'https://robohash.org/' + index} height="60" width="60" />
+                            <Image src={'https://stamp.fyi/avatar/' + datafetch.holder} height="60" width="60" />
 
                           </div>
                         </th>

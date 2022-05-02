@@ -8,15 +8,6 @@ import NavbarHome from '../components/layouts/navbarHome'
 import TokenTransfer from '../components/tokenTransfer'
 
 const Home = () => {
-  const vote = useVote(process.env.NEXT_PUBLIC_VOTE_ADDRESS)
-
-  useEffect(() => {
-    if (vote) {
-      const proposalId = '0x571fcb98502e6a057a91c2b1894c163a84c68646a04a69d63fcc33c70c56cc6e'
-      vote.execute(proposalId);
-    }
-  }, [vote]);
-
   return (
     <>
       <NavbarHome />
