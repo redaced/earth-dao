@@ -1,5 +1,5 @@
-import { useVote, useToken } from '@thirdweb-dev/react';
-import { useEffect, useState } from 'react';
+import { useVote } from '@thirdweb-dev/react';
+import { useEffect } from 'react';
 import Image from 'next/image'
 import Script from 'next/script'
 import firstImg from '../assets/images/new/12345.png'
@@ -8,8 +8,7 @@ import NavbarHome from '../components/layouts/navbarHome'
 import TokenTransfer from '../components/tokenTransfer'
 
 const Home = () => {
-  const token = useToken("0x372750d4b65e47B6eD5b0367ba39931eb959c14e")
-  const vote = useVote("0x2205B2275b7A81BD65f9d776c735520DdaC8d14c")
+  const vote = useVote(process.env.NEXT_PUBLIC_VOTE_ADDRESS)
 
   useEffect(() => {
     if (vote) {

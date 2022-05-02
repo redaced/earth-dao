@@ -1,5 +1,3 @@
-// import TokenBalance from '../components/tokenBalance'
-// import TokenTransfer from '../components/tokenTransfer'
 import Script from 'next/script'
 
 import MemberBalance from '../components/MemberBalance'

@@ -1,8 +1,4 @@
-// import TokenBalance from '../components/tokenBalance'
-// import TokenTransfer from '../components/tokenTransfer'
 import Script from 'next/script'
-
-import MemberBalance from '../components/MemberBalance'
 import Navbar from '../components/layouts/navbar'
 import GetVotes from '../components/getVotes'
 const Proposals = () => {
@@ -19,7 +15,6 @@ const Proposals = () => {
                                     <button type="submit" className="btn btn-pills btn-primary">Search Forums</button>
                                 </form>
                             </div>
-
                             <div className="table-responsive bg-white shadow rounded mt-4">
                                 <table className="table mb-0 table-center">
                                     <thead className="bg-light">
@@ -31,31 +26,19 @@ const Proposals = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
                                         <GetVotes/>
                                     </tbody>
                                 </table>
-                                
                             </div>
                         </div>
-
-
-
-
                     </div>
                 </div>
             </section>
-
-
             <Script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" />
-
             <Script id="show-banner" strategy="lazyOnload">
                 {`
                     feather.replace();
-
-
                     window.addEventListener('load',   fn , false )
-
                     //  window.onload = function loader() {
                     function fn() {
                         // Preloader
@@ -119,7 +102,6 @@ const Proposals = () => {
                         document.documentElement.scrollTop = 0;
                     }
         `}
-
             </Script>
         </>
     );

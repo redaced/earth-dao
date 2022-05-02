@@ -1,40 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useAddress, useEditionDrop, useToken } from '@thirdweb-dev/react';
+import { useToken } from '@thirdweb-dev/react';
 import Image from 'next/image'
 import Link from 'next/link'
 function MemberBalance() {
-  const editionDrop = useEditionDrop("0xd6be70A3CA3d3fAaB7978FCe946C4af210dA17a8");
-  //   const token = useToken("0x372750d4b65e47B6eD5b0367ba39931eb959c14e");
-  //   const address = useAddress();
-  //   const [myEarthToken, setMyEarthToken] = useState([]);
-  const [memberAddresses, setMemberAddresses] = useState([]);
-  //   const editionDrop = useEditionDrop("0xd6be70A3CA3d3fAaB7978FCe946C4af210dA17a8");
-  const token = useToken("0x372750d4b65e47B6eD5b0367ba39931eb959c14e");
-  //   const address = useAddress();
-  //   const [memberAddresses, setMemberAddresses] = useState([]);
+  const token = useToken(process.env.NEXT_PUBLIC_TOKEN_ADDRESS);
   const [memberTokenAmounts, setMemberTokenAmounts] = useState([]);
 
-  //   useEffect(() => {
-  //     const getAllAddresses = async () => {
-  //       try {
-  //         const memberAddresses = await editionDrop.history.getAllClaimerAddresses(0);
-  //         setMemberAddresses(memberAddresses);
-  //         console.log("🚀 Members addresses", memberAddresses);
-  //       } catch (error) {
-  //         console.error("failed to get member list", error);
-  //       }
-
-  //     };
-  //     getAllAddresses();
-  //   }, [editionDrop]);
-
-  // This useEffect grabs the # of token each member holds.
   useEffect(() => {
     const getAllBalances = async () => {
       try {
         const amounts = await token.history.getAllHolderBalances();
         setMemberTokenAmounts(amounts);
-        console.log("👜 Amounts", amounts);
       } catch (error) {
         console.error("failed to get member balances", error);
       }
@@ -49,11 +25,7 @@ function MemberBalance() {
   });
   return (
     <div>
-      {/* <p>address: {address}</p> */}
-      {/* <p>member list: {myEarthToken}</p> */}
-
       <div className="container mt-100 mt-60">
-
         <div className="row" id="counter">
           <div className="col-lg-3 col-md-6 col-12 mt-4 pt-2">
             <div className="card features feature-primary explore-feature border-0 shadow rounded text-center">
@@ -140,7 +112,7 @@ function MemberBalance() {
 
                   <tbody>
                     {memberTokenAmounts.map((datafetch, index) =>
-                      <tr>
+                      <tr key={index}>
                         <th className="p-3">
                           <div className="align-items-center">
                             <Image src={'https://robohash.org/' + index} height="60" width="60" />
@@ -166,8 +138,6 @@ function MemberBalance() {
                           <h6 className="mt-0"><span className="text-primary">{datafetch.balance.displayValue}</span> токен</h6></td>
 
                       </tr>)}
-
-
                   </tbody>
                 </table>
               </div>
@@ -175,7 +145,6 @@ function MemberBalance() {
               <div className="mt-4 pt-2 text-center">
                 <a className="text-primary h6">Бусад эзэмшигчдийг харах <i className="uil uil-angle-right-b align-middle"></i></a>
               </div >
-
             </div>
           </div>
         </div>

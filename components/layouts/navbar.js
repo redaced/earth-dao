@@ -1,12 +1,11 @@
-import { useAddress, useDisconnect, useMetamask, useVote, useToken, VoteType } from '@thirdweb-dev/react';
+import { useAddress, useDisconnect, useMetamask, useToken } from '@thirdweb-dev/react';
 import { useEffect, useState } from 'react';
 import Image from 'next/image'
 import Link from 'next/link'
 import logoImg from '../../assets/images/logo-light.png'
 import logoDark from '../../assets/images/logo-dark.png'
 export default function Navbar({ children }) {
-    const vote = useVote("0x2205B2275b7A81BD65f9d776c735520DdaC8d14c")
-    const token = useToken("0x372750d4b65e47B6eD5b0367ba39931eb959c14e")
+    const token = useToken(process.env.NEXT_PUBLIC_TOKEN_ADDRESS)
     const address = useAddress();
     const connectWithMetamask = useMetamask();
     const disconnectWallet = useDisconnect();

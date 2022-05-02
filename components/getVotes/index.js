@@ -4,13 +4,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 function GetVotes() {
-  const vote = useVote("0x2205B2275b7A81BD65f9d776c735520DdaC8d14c")
+  const vote = useVote(process.env.NEXT_PUBLIC_VOTE_ADDRESS)
   const [votes, setVotes] = useState([]);
   useEffect(() => {
     const getVotes = async () => {
       try {
         const votes = await vote.getAll();
-        console.log(votes)
         setVotes(votes);
       } catch (error) {
         console.error("votes: ", error);

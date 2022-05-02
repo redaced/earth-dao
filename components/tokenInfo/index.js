@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useToken } from '@thirdweb-dev/react';
 
 function TokenInfo() {
-  const token = useToken("0x372750d4b65e47B6eD5b0367ba39931eb959c14e");
+  const token = useToken(process.env.NEXT_PUBLIC_TOKEN_ADDRESS);
   const [tokenInfo, setTokenInfo] = useState([]);
     useEffect(() => {
     const getTokenInfo = async () => {

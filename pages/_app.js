@@ -4,17 +4,13 @@ import '../assets/css/bootstrap.min.css';
 import '../assets/css/icons.min.css';
 import '../assets/libs/@iconscout/unicons/css/line.css';
 import '../assets/css/style.min.css';
-
-// This is the chainId your dApp will work on.
 const activeChainId = ChainId.Mainnet;
-
+const URL = process.env.NEXT_PUBLIC_ALCHEMY_API_URL
 function MyApp({ Component, pageProps }) {
   return (
-    <ThirdwebProvider desiredChainId={activeChainId} chainRpc={{ [ChainId.Mainnet]: "https://polygon-mumbai.g.alchemy.com/v2/ueAZv5okiE4r3841xGA02EZkF04E8zOx" }}>
-      
+    <ThirdwebProvider desiredChainId={activeChainId} chainRpc={{ [ChainId.Mainnet]: URL }}>
       <Layout>
           <Component {...pageProps} />
-        
       </Layout>
     </ThirdwebProvider>
   );

@@ -4,8 +4,8 @@ import { ethers } from 'ethers';
 
 function TokenTransfer() {
   const connectWithMetamask = useMetamask();
-  const token = useToken("0x372750d4b65e47B6eD5b0367ba39931eb959c14e")
-  const vote = useVote("0x2205B2275b7A81BD65f9d776c735520DdaC8d14c")
+  const token = useToken(process.env.NEXT_PUBLIC_TOKEN_ADDRESS)
+  const vote = useVote(process.env.NEXT_PUBLIC_VOTE_ADDRESS)
   const address = useAddress()
   const [value, setValue] = useState('')
 
