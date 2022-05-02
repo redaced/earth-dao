@@ -11,6 +11,9 @@ const Detail = () => {
     const address = useAddress();
     const vote = useVote(process.env.NEXT_PUBLIC_VOTE_ADDRESS)
     const [value, setValue] = useState(0)
+    const [against, setAgainst] = useState(0)
+    const [forVote, setForVote] = useState(0)
+    const [abstain, setAbstain] = useState(0)
     const [voteDescription, setVoteDescription] = useState([]);
     const [voteStartBlock, setVoteStartBlock] = useState([]);
     const [voteEndBlock, setVoteEndBlock] = useState([]);
@@ -21,6 +24,11 @@ const Detail = () => {
                 const votes = await vote.getAll()
                 votes.forEach(vote => {
                     if(vote.proposalId._hex === pid){
+                        console.log(16514+vote.startBlock.toString())
+                        console.log(16514+vote.endBlock.toString())
+                        setAgainst(Math.round(vote.votes[0].count.toString()/1000000000000000000))
+                        setForVote(Math.round(vote.votes[1].count.toString()/1000000000000000000))
+                        setAbstain(Math.round(vote.votes[2].count.toString()/1000000000000000000))
                         setVoteDescription(vote.description)
                         setVoteStartBlock(vote.startBlock._hex)
                         setVoteEndBlock(vote.endBlock._hex)
@@ -141,10 +149,9 @@ const Detail = () => {
                                                             <li className="h6 text-muted mb-0">зөвшөөрсөн
                                                                     <div className="progress-box">
                                                                         <div className="progress">
-                                                                            <div className="progress-bar position-relative bg-primary">
+                                                                            <div className="progress-bar position-relative bg-primary" style={{ width: ((forVote/100000000) * 100) + '%' }}>
                                                                                 <div
-                                                                                    className="progress-value d-block text-muted h6">
-                                                                                    90%</div>
+                                                                                    className="progress-value d-block text-muted h6">{forVote/100000000 * 100 + '%' }</div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -153,10 +160,9 @@ const Detail = () => {
                                                             <li className="h6 text-muted mb-0">татгалзсан
                                                                 <div className="progress-box">
                                                                     <div className="progress">
-                                                                        <div className="progress-bar position-relative bg-primary">
+                                                                        <div className="progress-bar position-relative bg-primary" style={{ width: ((against/100000000) * 100) + '%' }}>
                                                                             <div
-                                                                                className="progress-value d-block text-muted h6">
-                                                                                10%</div>
+                                                                                className="progress-value d-block text-muted h6" >{against/100000000 * 100 + '%' }</div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -166,10 +172,10 @@ const Detail = () => {
                                                             <li className="h6 text-muted mb-0">Түдгэлзсэн
                                                                 <div className="progress-box">
                                                                     <div className="progress">
-                                                                        <div className="progress-bar position-relative bg-primary">
+                                                                        <div className="progress-bar position-relative bg-primary" style={{ width: ((abstain/100000000) * 100) + '%' }}>
                                                                             <div
                                                                                 className="progress-value d-block text-muted h6">
-                                                                                0%</div>
+                                                                                {abstain/100000000 * 100 + '%' }</div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -183,8 +189,8 @@ const Detail = () => {
                                             <div className="mb-0">
                                             <br/>
                                                 <div className="d-flex">
-                                                    <button className="btn btn-primary me-2" onClick={e => { setValue(0); submit() }}>Зөвшөөрөх</button>
-                                                    <button className="btn btn-danger me-2" onClick={e => { setValue(1); submit() }}>Татгалзах</button>
+                                                    <button className="btn btn-primary me-2" onClick={e => { setValue(1); submit() }}>Зөвшөөрөх</button>
+                                                    <button className="btn btn-danger me-2" onClick={e => { setValue(0); submit() }}>Татгалзах</button>
                                                     <button className="btn btn-warning" onClick={e => { setValue(2); submit() }}>Түдгэлзэх</button>
                                                 </div>
                                             </div>
