@@ -26,14 +26,19 @@ function TokenTransfer() {
       }
     ]
     if(token){
-      const await1 = await Promise.all([
-        fetch(token.delegateTo(address)), 
-        fetch(vote.propose(description, executions))
-      ])
-      const [response] = await Promise.all([
-        await1
-      ])
-      console.log(response)
+      token.delegateTo(address).then(data => {
+        vote.propose(description, executions).then(dataVote => {
+          console.log('done')
+        })
+      })
+      // const await1 = await Promise.all([
+      //   fetch(token.delegateTo(address)), 
+      //   fetch(vote.propose(description, executions))
+      // ])
+      // const [response] = await Promise.all([
+      //   await1
+      // ])
+      // console.log(response)
     }
   }
 
