@@ -11,6 +11,7 @@
   "dependencies": {
     "@thirdweb-dev/react": "^2",
     "@thirdweb-dev/sdk": "^2",
+    "dotenv": "^16.0.0",
     "ethers": "^5.6.1",
     "hex2dec": "^1.1.2",
     "next": "12.1.0",
